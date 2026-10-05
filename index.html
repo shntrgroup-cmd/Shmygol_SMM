@@ -1,0 +1,648 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Anastasia Shmygol</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500&family=Golos+Text:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: dark editorial index — huge wide display type against tiny mono UI labels; each project gets its own composition on a shared 12-col grid */
+:root{
+  --bg:#0d0d0f; --bg-2:#151518; --line:rgba(236,232,226,.13); --line-2:rgba(236,232,226,.28);
+  --fg:#ece8e2; --muted:#8f8b87; --accent:#d99aae; --on-accent:#0d0d0f;
+  --f-display:"Unbounded","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Golos Text","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --gut:clamp(16px,3.2vw,48px); --max:1440px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:400 16px/1.6 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+img,video{display:block;max-width:100%}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gut)}
+.mono{font:400 11px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mono b{font-weight:500;color:var(--fg)}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+:focus-visible{outline:1px solid var(--accent);outline-offset:3px}
+
+/* top bar */
+.bar{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);background:linear-gradient(var(--bg),rgba(13,13,15,.0));}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:16px}
+.bar nav{display:flex;gap:20px}
+.bar a{text-decoration:none}
+.bar nav a:hover,.bar nav a:focus-visible{color:var(--fg)}
+.logo{font:500 13px/1 var(--f-display);letter-spacing:.02em}
+
+/* hero */
+.hero{padding-top:88px}
+.hero .wrap{display:grid;grid-template-columns:1fr minmax(0,.95fr);gap:var(--gut);align-items:end}
+.hero-l{display:flex;flex-direction:column;gap:32px;padding-bottom:8px;min-width:0}
+.hero-meta{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:12px}
+.name{font-weight:300;font-size:clamp(46px,8.4vw,132px);line-height:.9;letter-spacing:-.045em;text-transform:uppercase}
+.name span{display:block}
+.name span:last-child{padding-left:.6em}
+.pos{font:400 clamp(14px,1.5vw,20px)/1.3 var(--f-display);letter-spacing:.12em}
+.pos i{font-style:normal;color:var(--accent)}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.facts div{background:var(--bg);padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.cta{display:inline-flex;align-items:center;gap:14px;align-self:flex-start;text-decoration:none;font:500 12px/1 var(--f-mono);letter-spacing:.12em;border:1px solid var(--line-2);padding:16px 20px;border-radius:999px;transition:background .25s,color .25s}
+.cta:hover{background:var(--fg);color:var(--bg)}
+.hero-r{position:relative;min-width:0}
+.hero-r .tag{position:absolute;top:12px;left:12px;z-index:2}
+.portrait{aspect-ratio:2/3;width:100%;max-height:calc(100vh - 110px);margin-left:auto}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
+@media (prefers-reduced-motion:no-preference){
+  .hero-l>*{animation:up .9s cubic-bezier(.2,.7,.2,1) both}
+  .hero-l>*:nth-child(2){animation-delay:.08s}.hero-l>*:nth-child(3){animation-delay:.16s}.hero-l>*:nth-child(4){animation-delay:.24s}.hero-l>*:nth-child(5){animation-delay:.32s}
+  .hero-r{animation:fade 1.4s ease .1s both}
+}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0;transform:scale(1.015)}to{opacity:1;transform:none}}
+
+/* pending slot (missing file — visibly not a work) */
+.pending{border:1px dashed var(--line-2);display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:16px;background:repeating-linear-gradient(135deg,transparent 0 14px,rgba(236,232,226,.025) 14px 15px)}
+.pending{min-width:0;overflow:hidden}.pending .mono{overflow-wrap:anywhere}
+.pending .mono:first-child{color:var(--accent)}
+
+/* marquee */
+.marquee{border-block:1px solid var(--line);overflow:hidden;margin-top:56px;padding-block:18px}
+.marquee-track{display:flex;width:max-content;gap:48px;font:300 clamp(22px,3vw,40px)/1 var(--f-display);letter-spacing:.06em;white-space:nowrap}
+.marquee-track span{color:var(--muted)}.marquee-track em{font-style:normal;color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){.marquee-track{animation:mq 38s linear infinite}}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* sections */
+section{padding-block:clamp(72px,10vw,140px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:var(--gut);align-items:end;border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:clamp(36px,5vw,64px)}
+.sec-title{font-size:clamp(34px,6vw,88px);line-height:.95;text-transform:uppercase;font-weight:300}
+.sec-head .mono{align-self:start}
+
+/* on set */
+.onset-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut);align-items:start}
+.statement{grid-column:1/8;font:300 clamp(28px,4.4vw,64px)/1.05 var(--f-display);letter-spacing:-.03em;text-transform:uppercase}
+.statement em{font-style:normal;color:var(--accent)}
+.onset-text{grid-column:8/13;display:flex;flex-direction:column;gap:20px;padding-top:8px}
+.onset-text p{max-width:46ch;color:#cfcac3}
+.onset-key-f{grid-column:1/9}
+.onset-vid{grid-column:9/13}
+.onset-ph{grid-column:2/7;margin-top:clamp(24px,4vw,56px)}
+.onset-vid2{grid-column:8/12;margin-top:clamp(64px,10vw,180px)}
+.flow{display:flex;align-items:center;justify-content:center;gap:clamp(14px,3vw,40px);padding-block:clamp(56px,8vw,110px) 0;font:300 clamp(30px,6vw,96px)/1 var(--f-display);letter-spacing:-.03em;text-transform:uppercase;flex-wrap:wrap}
+.flow .ar{color:var(--accent);font-weight:300}
+
+/* media */
+.v{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.v video{width:100%;background:#000;object-fit:contain}
+.v916 video,.v916.pending{aspect-ratio:9/16}
+.v169 video{aspect-ratio:16/9}
+.v figcaption,.ph figcaption{display:flex;justify-content:space-between;gap:12px}
+.ph{margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.zoom{cursor:zoom-in;position:relative;overflow:hidden;background:var(--bg-2)}
+.zoom img{width:100%;height:auto;transition:transform .8s cubic-bezier(.2,.7,.2,1),filter .6s}
+.zoom:hover img{transform:scale(1.025)}
+.zoom .hov{position:absolute;left:12px;bottom:12px;background:var(--bg);color:var(--fg);padding:6px 10px;opacity:0;transform:translateY(6px);transition:.3s}
+.zoom:hover .hov,.zoom:focus-visible .hov{opacity:1;transform:none}
+
+/* work index */
+.index{list-style:none;margin:0 0 clamp(56px,8vw,110px);padding:0;border-top:1px solid var(--line)}
+.index a{display:grid;grid-template-columns:48px minmax(0,1.3fr) minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;transition:padding .3s,color .3s}
+.index a:hover,.index a:focus-visible{padding-left:12px;color:var(--accent)}
+.index .t{font:400 clamp(17px,2vw,26px)/1.15 var(--f-display);letter-spacing:-.01em}
+.index .smm{color:var(--accent)}
+
+/* project */
+.proj{border-top:1px solid var(--line);padding-block:clamp(40px,5vw,64px) clamp(64px,9vw,120px);scroll-margin-top:60px}
+.proj-head{display:grid;grid-template-columns:72px minmax(0,1.4fr) minmax(0,1fr);gap:var(--gut);align-items:start;margin-bottom:clamp(28px,4vw,48px)}
+.proj-num{font:300 clamp(28px,3vw,44px)/1 var(--f-display);color:var(--muted)}
+.proj-title{font-size:clamp(36px,6.4vw,104px);line-height:.92;font-weight:400;text-transform:uppercase;letter-spacing:-.04em}
+.proj-sub{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.proj-info{display:flex;flex-direction:column;gap:18px;min-width:0}
+.proj-info p{color:#cfcac3;max-width:48ch}
+.role{display:flex;flex-direction:column;gap:6px;border:1px solid var(--accent);padding:12px 14px}
+.role .mono:first-child{color:var(--accent)}
+.role strong{font:500 13px/1.35 var(--f-mono);letter-spacing:.08em}
+.badge{font:500 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:var(--on-accent);padding:6px 9px}
+.chip{font:400 10px/1 var(--f-mono);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--line-2);color:var(--muted);padding:6px 9px;border-radius:999px}
+.steps{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font:400 12px/1 var(--f-mono);letter-spacing:.1em}
+.steps i{font-style:normal;color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;text-decoration:none;font:500 12px/1 var(--f-mono);letter-spacing:.12em;background:var(--fg);color:var(--bg);padding:14px 18px;border-radius:999px;transition:background .25s}
+.btn:hover{background:var(--accent)}
+.label-row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:20px}
+
+.g{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut);align-items:start}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+.push1{grid-column-start:2}
+.mt{margin-top:clamp(40px,6vw,88px)}
+.offset{margin-top:clamp(40px,8vw,140px)}
+.note{color:#cfcac3;max-width:42ch}
+.mock{background:transparent}
+.mock img{width:100%;height:auto}
+
+/* about / equipment / contact */
+.about-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:var(--gut)}
+.about-grid h3{font-size:clamp(26px,3.4vw,48px);line-height:1;text-transform:uppercase;font-weight:300}
+.about-grid p{max-width:60ch;color:#cfcac3;font-size:17px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.tags span{font:400 12px/1 var(--f-mono);letter-spacing:.04em;border:1px solid var(--line-2);padding:9px 12px;border-radius:999px}
+.equip{display:grid;grid-template-columns:minmax(0,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.equip div{background:var(--bg);padding:20px;display:flex;flex-direction:column;gap:28px;justify-content:space-between}
+.equip strong{font:400 clamp(15px,1.6vw,20px)/1.2 var(--f-display)}
+.contact{padding-bottom:48px}
+.big{font-size:clamp(44px,10vw,168px);line-height:.88;font-weight:300;text-transform:uppercase;letter-spacing:-.05em}
+.big em{font-style:normal;color:var(--accent)}
+.contacts{display:grid;grid-template-columns:minmax(0,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(40px,6vw,72px)}
+.contacts a,.contacts div{background:var(--bg);padding:22px 20px;display:flex;flex-direction:column;gap:14px;text-decoration:none;transition:background .25s;min-width:0}
+.contacts a:hover{background:var(--bg-2)}
+.contacts strong{font:400 clamp(15px,1.6vw,20px)/1.2 var(--f-display);overflow-wrap:anywhere}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:72px;padding-top:16px}
+
+/* lightbox + cursor */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(8,8,10,.94);display:flex;align-items:center;justify-content:center;padding:max(24px,env(safe-area-inset-top,0px)) 16px;cursor:zoom-out}
+.lb img{max-height:100%;max-width:100%;width:auto;height:auto;object-fit:contain}
+.lb .mono{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:16px}
+.cur{position:fixed;left:0;top:0;z-index:90;pointer-events:none;background:var(--accent);color:var(--on-accent);padding:7px 10px;border-radius:999px;font:500 10px/1 var(--f-mono);letter-spacing:.12em;opacity:0;transition:opacity .2s;transform:translate(-50%,-50%)}
+.cur.on{opacity:1}
+@media (hover:none){.cur{display:none}}
+
+/* responsive */
+@media (max-width:900px){
+  .bar nav{display:none}
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-r{order:2}.portrait{max-height:none}
+  .sec-head{grid-template-columns:1fr}
+  .onset-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .statement,.onset-text,.onset-key-f,.onset-ph{grid-column:1/-1}
+  .onset-vid,.onset-vid2{grid-column:span 1;margin-top:0}
+  .onset-ph{margin-top:0;order:1}
+  .onset-vid,.onset-vid2{order:2}
+  .proj-head{grid-template-columns:1fr}
+  .proj-num{font-size:20px}
+  .g{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .c3,.c4,.c5,.c6,.c7,.c8,.c12{grid-column:span 2}
+  .g > *{grid-column:span 2 !important}
+  .g > .v916{grid-column:span 1 !important}
+  .push1{grid-column-start:auto}
+  .offset{margin-top:0}
+  .index a{grid-template-columns:32px minmax(0,1fr)}
+  .index a .mono:nth-child(3),.index a .mono:nth-child(4){grid-column:2}
+  .about-grid{grid-template-columns:1fr}
+  .contacts{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+  .facts{grid-template-columns:1fr}
+  .hero-meta .mono:last-child{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <a href="#top" class="logo">A/S</a>
+    <nav class="mono" aria-label="Sections">
+      <a href="#onset">On set</a><a href="#work">Work</a><a href="#archive">Archive</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </nav>
+    <span class="mono">Portfolio / 2026</span>
+  </div>
+</header>
+
+<main id="top">
+<!-- 01 / INTRO -->
+<section class="hero" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="hero-l">
+      <div class="hero-meta"><span class="mono">01 / Intro</span><span class="mono">Visual communication</span></div>
+      <h1 class="name"><span>Anastasia</span><span>Shmygol</span></h1>
+      <p class="pos">SMM <i>·</i> CONTENT <i>·</i> PHOTO <i>·</i> VIDEO</p>
+      <div class="facts">
+        <div><span class="mono">Base</span><span class="mono"><b>Moscow / Available for relocation</b></span></div>
+        <div><span class="mono">Language</span><span class="mono"><b>English B1</b></span></div>
+      </div>
+      <a class="cta" href="#work">VIEW PROJECTS <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="hero-r">
+      <!-- HERO PORTRAIT: replace this pending block with
+           <div class="portrait"><img src="m/hero.jpg" alt="Anastasia Shmygol"></div> -->
+      <div class="portrait"><img src="m/hero.jpg" alt="Анастасия Шмыголь в чёрном костюме с букетом гвоздик" fetchpriority="high"></div>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>SMM <em>·</em> CONTENT <em>·</em> PHOTO <em>·</em> VIDEO</span><span>PROCESS <em>→</em> RESULT</span><span>SMM <em>·</em> CONTENT <em>·</em> PHOTO <em>·</em> VIDEO</span><span>PROCESS <em>→</em> RESULT</span>
+      <span>SMM <em>·</em> CONTENT <em>·</em> PHOTO <em>·</em> VIDEO</span><span>PROCESS <em>→</em> RESULT</span><span>SMM <em>·</em> CONTENT <em>·</em> PHOTO <em>·</em> VIDEO</span><span>PROCESS <em>→</em> RESULT</span>
+    </div>
+  </div>
+</section>
+
+<!-- 02 / ON SET -->
+<section id="onset">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono">02 / On set</span>
+      <h2 class="sec-title">On set / Behind the scenes</h2>
+    </div>
+    <div class="onset-grid">
+      <p class="statement">Съёмка — <em>живой</em> организм.</p>
+      <div class="onset-text">
+        <p>Для меня съёмка — это живой процесс. Это не только заранее выстроенные свет, композиция и пространство, но и постоянное взаимодействие с командой, внимание к деталям и способность замечать то, что необходимо изменить прямо в кадре. На площадке я включаюсь в процесс и довожу визуальное решение до результата.</p>
+        <span class="mono"><b>Team / Light / Space / Details / Process</b></span>
+      </div>
+      <figure class="ph onset-key-f">
+        <div class="zoom" tabindex="0" data-cap="On set · Nescafé"><img src="m/onset-key.jpg" alt="Кадр со съёмки Nescafé Gold: стакан с кофе и апельсиновым соком на фоне гирлянды"><span class="hov mono">Lighting</span></div>
+        <figcaption><span class="mono"><b>001</b></span><span class="mono">On set · Nescafé · Lighting</span></figcaption>
+      </figure>
+      <figure class="v v916 onset-vid">
+        <video controls playsinline preload="none" poster="m/nescafe-bts-2.jpg" src="m/nescafe-bts-2.mp4"></video>
+        <figcaption><span class="mono"><b>002</b></span><span class="mono">On set · Nescafé</span></figcaption>
+      </figure>
+      <figure class="ph onset-ph">
+        <div class="zoom" tabindex="0" data-cap="On set · Details"><img src="m/onset-set.jpg" alt="Анастасия на комоде поправляет детали декорации, кадр на мониторе съёмки" loading="lazy"><span class="hov mono">Details</span></div>
+        <figcaption><span class="mono"><b>003</b></span><span class="mono">On set · Details</span></figcaption>
+      </figure>
+      <figure class="v v916 onset-vid2">
+        <video controls playsinline preload="none" poster="m/onset-3.jpg" src="m/onset-3.mp4"></video>
+        <figcaption><span class="mono"><b>004</b></span><span class="mono">On set · Production</span></figcaption>
+      </figure>
+    </div>
+    <div class="flow"><span>Process</span><span class="ar">→</span><span>Result</span></div>
+  </div>
+</section>
+
+<!-- 03 / SELECTED WORK -->
+<section id="work" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono">03 / Selected work</span>
+      <h2 class="sec-title">Selected work</h2>
+    </div>
+
+    <ol class="index">
+      <li><a href="#p-nescafe"><span class="mono">01</span><span class="t">Nescafé</span><span class="mono">Commercial production</span><span class="mono"><b>Lighting / On set</b></span></a></li>
+      <li><a href="#p-fashion"><span class="mono">02</span><span class="t">Fashion brand</span><span class="mono">Fashion content</span><span class="mono"><b>Shooting / Video / Editing</b></span></a></li>
+      <li><a href="#p-reiva"><span class="mono">03</span><span class="t">РейВа</span><span class="mono">Expert / personal brand · <span class="smm">SMM</span></span><span class="mono"><b>Script / Content / Shooting</b></span></a></li>
+      <li><a href="#p-tsum"><span class="mono">04</span><span class="t">ЦУМ / TSUM</span><span class="mono">Commercial photography</span><span class="mono"><b>Photography</b></span></a></li>
+      <li><a href="#p-med"><span class="mono">05</span><span class="t">Aesthetic medicine</span><span class="mono">SMM + content · <span class="smm">SMM</span></span><span class="mono"><b>SMM / Content / Photo / Video</b></span></a></li>
+      <li><a href="#p-beauty"><span class="mono">06</span><span class="t">Beauty brand</span><span class="mono">Product photography</span><span class="mono"><b>Product photo / Visual content</b></span></a></li>
+      <li><a href="#p-seelen"><span class="mono">07</span><span class="t">Seelenblume</span><span class="mono">Brand social media · <span class="smm">SMM</span></span><span class="mono"><b>SMM / Content / Photo &amp; Video</b></span></a></li>
+    </ol>
+
+    <!-- 01 NESCAFE -->
+    <article class="proj" id="p-nescafe">
+      <div class="proj-head">
+        <span class="proj-num">01</span>
+        <div>
+          <h3 class="proj-title">Nescafé</h3>
+          <div class="proj-sub"><span class="chip">Commercial campaign</span><span class="chip">Lighting</span><span class="chip">On set</span></div>
+        </div>
+        <div class="proj-info">
+          <div class="role"><span class="mono">My role</span><strong>LIGHTING / ON SET</strong></div>
+          <p>Работа со светом на коммерческой рекламной съёмке. Финальную камеру вёл другой специалист — моя зона ответственности: свет, пространство кадра и работа на площадке внутри production-команды.</p>
+        </div>
+      </div>
+      <div class="label-row"><span class="mono"><b>Process</b> · on set</span><span class="mono">Lighting</span></div>
+      <div class="g">
+        <figure class="v v916 c4">
+          <video controls playsinline preload="none" poster="m/nescafe-bts-3.jpg" src="m/nescafe-bts-3.mp4"></video>
+          <figcaption><span class="mono"><b>001</b></span><span class="mono">Process · Monitor</span></figcaption>
+        </figure>
+        <figure class="v v916 c4 offset">
+          <video controls playsinline preload="none" poster="m/nescafe-bts-2.jpg" src="m/nescafe-bts-2.mp4"></video>
+          <figcaption><span class="mono"><b>002</b></span><span class="mono">Process · On set</span></figcaption>
+        </figure>
+        <figure class="v v916 c4">
+          <video controls playsinline preload="none" poster="m/nescafe-bts-4.jpg" src="m/nescafe-bts-4.mp4"></video>
+          <figcaption><span class="mono"><b>003</b></span><span class="mono">Process · Lighting</span></figcaption>
+        </figure>
+      </div>
+      <div class="flow" style="padding-block:clamp(40px,6vw,80px);font-size:clamp(24px,4vw,56px)"><span>Process</span><span class="ar">→</span><span>Result</span></div>
+      <div class="label-row"><span class="mono"><b>Result</b> · commercial</span><span class="mono">Camera: another specialist</span></div>
+      <div class="g">
+        <figure class="v v169 c12" style="grid-column:2/span 10">
+          <video controls playsinline preload="none" poster="m/nescafe-result.jpg" src="m/nescafe-result.mp4"></video>
+          <figcaption><span class="mono"><b>Nescafé Gold</b></span><span class="mono">Lighting / On set</span></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 02 FASHION -->
+    <article class="proj" id="p-fashion">
+      <div class="proj-head">
+        <span class="proj-num">02</span>
+        <div>
+          <h3 class="proj-title">Fashion brand</h3>
+          <div class="proj-sub"><span class="chip">Photo &amp; video content</span><span class="chip">Fashion</span></div>
+        </div>
+        <div class="proj-info">
+          <div class="role"><span class="mono">My role</span><strong>SHOOTING / VIDEO / EDITING</strong></div>
+          <p>Контент для бренда одежды. Я сама снимала материал и монтировала ролики — от кадра до готового видео для соцсетей бренда.</p>
+        </div>
+      </div>
+      <div class="g">
+        <figure class="v v916 c4 push1" style="grid-column:2/span 4">
+          <video controls playsinline preload="none" poster="m/fashion-1.jpg" src="m/fashion-1.mp4"></video>
+          <figcaption><span class="mono"><b>Look 01</b></span><span class="mono">Shooting / Editing</span></figcaption>
+        </figure>
+        <figure class="v v916 c4 offset" style="grid-column:8/span 4">
+          <video controls playsinline preload="none" poster="m/fashion-2.jpg" src="m/fashion-2.mp4"></video>
+          <figcaption><span class="mono"><b>Look 02</b></span><span class="mono">Shooting / Editing</span></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 03 REIVA -->
+    <article class="proj" id="p-reiva">
+      <div class="proj-head">
+        <span class="proj-num">03</span>
+        <div>
+          <h3 class="proj-title">РейВа</h3>
+          <div class="proj-sub"><span class="badge">SMM / Content</span><span class="chip">Law firm &amp; founder</span></div>
+        </div>
+        <div class="proj-info">
+          <div class="role"><span class="mono">My role</span><strong>SCRIPT / CONTENT / SHOOTING</strong></div>
+          <p>SMM-контент для юридической фирмы «РейВа» и личного бренда её основательницы. Я придумывала идеи, писала сценарии и снимала — превращала юридическую экспертизу в понятные короткие видео.</p>
+          <div class="steps"><span>IDEA</span><i>→</i><span>SCRIPT</span><i>→</i><span>SHOOTING</span><i>→</i><span>CONTENT</span></div>
+        </div>
+      </div>
+      <div class="g">
+        <figure class="v v916 c4">
+          <video controls playsinline preload="none" poster="m/reiva-1.jpg" src="m/reiva-1.mp4"></video>
+          <figcaption><span class="mono"><b>Reels 01</b></span><span class="mono">Script / Shooting</span></figcaption>
+        </figure>
+        <figure class="v v916 c4 offset">
+          <video controls playsinline preload="none" poster="m/reiva-2.jpg" src="m/reiva-2.mp4"></video>
+          <figcaption><span class="mono"><b>Reels 02</b></span><span class="mono">Script / Shooting</span></figcaption>
+        </figure>
+        <figure class="v v916 c4">
+          <video controls playsinline preload="none" poster="m/reiva-3.jpg" src="m/reiva-3.mp4"></video>
+          <figcaption><span class="mono"><b>Long-form 2:00</b></span><span class="mono">Script / Shooting</span></figcaption>
+        </figure>
+      </div>
+      <div class="label-row mt"><span class="mono"><b>Result</b> · accounts in feed</span><span class="mono">Social media</span></div>
+      <div class="g">
+        <figure class="ph mock c4 push1" style="grid-column:2/span 4">
+          <div class="zoom" style="background:transparent" data-cap="reiva.group"><img src="m/reiva-frame-1.webp" alt="Лента Instagram reiva.group с контентом проекта" loading="lazy"><span class="hov mono">reiva.group</span></div>
+          <figcaption><span class="mono"><b>reiva.group</b></span><span class="mono">Brand account</span></figcaption>
+        </figure>
+        <figure class="ph mock c4 offset" style="grid-column:8/span 4">
+          <div class="zoom" style="background:transparent" data-cap="Founder account"><img src="m/reiva-frame-2.webp" alt="Раздел Reels аккаунта основательницы" loading="lazy"><span class="hov mono">Founder</span></div>
+          <figcaption><span class="mono"><b>Founder</b></span><span class="mono">Personal brand · Reels</span></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 04 TSUM -->
+    <article class="proj" id="p-tsum">
+      <div class="proj-head">
+        <span class="proj-num">04</span>
+        <div>
+          <h3 class="proj-title">ЦУМ / TSUM</h3>
+          <div class="proj-sub"><span class="chip">Catalog</span><span class="chip">Email campaign</span></div>
+        </div>
+        <div class="proj-info">
+          <div class="role"><span class="mono">My role</span><strong>PHOTOGRAPHY</strong></div>
+          <p>Фотографии для каталога ЦУМ и email-рассылки.</p>
+        </div>
+      </div>
+      <div class="g">
+        <figure class="ph c7">
+          <div class="zoom" tabindex="0" data-cap="TSUM · Catalog"><img src="m/tsum-3.jpg" alt="Модель в белом платье с букетом калл, фото для каталога ЦУМ" loading="lazy"><span class="hov mono">Commercial</span></div>
+          <figcaption><span class="mono"><b>TSUM / 01</b></span><span class="mono">Catalog</span></figcaption>
+        </figure>
+        <div class="c5" style="display:flex;flex-direction:column;gap:var(--gut)">
+          <figure class="ph">
+            <div class="zoom" tabindex="0" data-cap="TSUM · Email campaign"><img src="m/tsum-1.jpg" alt="Модель держит букет калл, фото для каталога ЦУМ" loading="lazy"><span class="hov mono">Fashion</span></div>
+            <figcaption><span class="mono"><b>TSUM / 02</b></span><span class="mono">Email campaign</span></figcaption>
+          </figure>
+        </div>
+        <figure class="ph c6 push1 mt" style="grid-column:4/span 6">
+          <div class="zoom" tabindex="0" data-cap="TSUM · Catalog"><img src="m/tsum-2.jpg" alt="Модель смотрит вниз, букет в опущенной руке, фото для каталога ЦУМ" loading="lazy"><span class="hov mono">Catalog</span></div>
+          <figcaption><span class="mono"><b>TSUM / 03</b></span><span class="mono">Photography</span></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 05 AESTHETIC MEDICINE -->
+    <article class="proj" id="p-med">
+      <div class="proj-head">
+        <span class="proj-num">05</span>
+        <div>
+          <h3 class="proj-title">Aesthetic medicine</h3>
+          <div class="proj-sub"><span class="badge">SMM / Content</span><span class="chip">Telegram</span></div>
+        </div>
+        <div class="proj-info">
+          <div class="role"><span class="mono">My role</span><strong>SMM / CONTENT / PHOTO / VIDEO</strong></div>
+          <p>Фото- и видеоконтент для проекта в сфере аппаратной косметологии и ведение его Telegram-канала: регулярные публикации, а не разовые ролики.</p>
+          <div class="steps"><span>CONTENT</span><i>→</i><span>SOCIAL MEDIA</span><i>→</i><span>PUBLICATION</span></div>
+          <a class="btn" href="https://t.me/reiginmed" target="_blank" rel="noopener">VIEW TELEGRAM ↗</a>
+        </div>
+      </div>
+      <div class="g">
+        <figure class="v v916 c4" style="grid-column:3/span 4">
+          <video controls playsinline preload="none" poster="m/med-1.jpg" src="m/med-1.mp4"></video>
+          <figcaption><span class="mono"><b>001</b></span><span class="mono">Content / Video</span></figcaption>
+        </figure>
+        <figure class="v v916 c4 offset" style="grid-column:8/span 4">
+          <video controls playsinline preload="none" poster="m/med-2.jpg" src="m/med-2.mp4"></video>
+          <figcaption><span class="mono"><b>002</b></span><span class="mono">Content / Video</span></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 06 BEAUTY -->
+    <article class="proj" id="p-beauty">
+      <div class="proj-head">
+        <span class="proj-num">06</span>
+        <div>
+          <h3 class="proj-title">Beauty brand</h3>
+          <div class="proj-sub"><span class="chip">Product photography</span></div>
+        </div>
+        <div class="proj-info">
+          <div class="role"><span class="mono">My role</span><strong>PRODUCT PHOTOGRAPHY / VISUAL CONTENT</strong></div>
+          <p>Предметная съёмка для косметического бренда: постановка, свет и финальные кадры, которые бренд использует в своих соцсетях.</p>
+        </div>
+      </div>
+      <div class="g">
+        <figure class="ph c6">
+          <div class="zoom" tabindex="0" data-cap="Beauty brand · Product"><img src="m/beauty-1.jpg" alt="Карандаши для бровей среди кусочков шоколада" loading="lazy"><span class="hov mono">Product</span></div>
+          <figcaption><span class="mono"><b>Frame 297</b></span><span class="mono">Product</span></figcaption>
+        </figure>
+        <figure class="ph c6 offset">
+          <div class="zoom" tabindex="0" data-cap="Beauty brand · Product"><img src="m/beauty-2.jpg" alt="Кремовые румяна в прозрачных футлярах" loading="lazy"><span class="hov mono">Product</span></div>
+          <figcaption><span class="mono"><b>Frame 298</b></span><span class="mono">Product</span></figcaption>
+        </figure>
+        <figure class="ph c5 push1 mt" style="grid-column:2/span 5">
+          <div class="zoom" tabindex="0" data-cap="Beauty brand · Product"><img src="m/beauty-3.jpg" alt="Три туши для бровей на прозрачных гидрогелевых шариках" loading="lazy"><span class="hov mono">Details</span></div>
+          <figcaption><span class="mono"><b>Frame 299</b></span><span class="mono">Details</span></figcaption>
+        </figure>
+        <figure class="ph c4 mt" style="grid-column:8/span 4">
+          <div class="zoom" tabindex="0" data-cap="Beauty brand · Publication"><img src="m/beauty-4.jpg" alt="Публикация бренда в Instagram с предметным кадром" loading="lazy"><span class="hov mono">Publication</span></div>
+          <figcaption><span class="mono"><b>Frame 314</b></span><span class="mono">In the brand feed</span></figcaption>
+        </figure>
+      </div>
+      <div class="label-row mt"><span class="mono"><b>Behind the scenes</b></span><span class="mono">→ Result above</span></div>
+      <div class="g">
+        <figure class="v v916 c3">
+          <video controls playsinline preload="none" poster="m/beauty-bts.jpg" src="m/beauty-bts.mp4"></video>
+          <figcaption><span class="mono"><b>001</b></span><span class="mono">On set</span></figcaption>
+        </figure>
+        <figure class="ph c3 v916">
+          <div class="zoom" tabindex="0" data-cap="Beauty brand · On set"><img src="m/beauty-bts-2.jpg" alt="Съёмочная площадка: модель в розовом костюме перед камерой и светом" loading="lazy"><span class="hov mono">On set</span></div>
+          <figcaption><span class="mono"><b>002</b></span><span class="mono">On set</span></figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- 07 SEELENBLUME -->
+    <article class="proj" id="p-seelen" style="padding-bottom:0">
+      <div class="proj-head">
+        <span class="proj-num">07</span>
+        <div>
+          <h3 class="proj-title">Seelenblume</h3>
+          <div class="proj-sub"><span class="badge">SMM / Content</span><span class="chip">Floral</span><span class="chip">Photo / Video</span></div>
+        </div>
+        <div class="proj-info">
+          <div class="role"><span class="mono">My role</span><strong>SMM / CONTENT / PHOTO &amp; VIDEO</strong></div>
+          <p>Ведение Telegram-канала цветочного магазина и регулярный визуальный контент для него: съёмка букетов, короткие видео, публикации.</p>
+          <a class="btn" href="https://t.me/SEELEN_BLUME" target="_blank" rel="noopener">VIEW TELEGRAM ↗</a>
+        </div>
+      </div>
+      <div class="g">
+        <figure class="v v916 c4" style="grid-column:2/span 4">
+          <video controls playsinline preload="none" poster="m/seelen-1.jpg" src="m/seelen-1.mp4"></video>
+          <figcaption><span class="mono"><b>Floral / 01</b></span><span class="mono">Content / Video</span></figcaption>
+        </figure>
+        <figure class="v v916 c4 offset" style="grid-column:7/span 4">
+          <video controls playsinline preload="none" poster="m/seelen-2.jpg" src="m/seelen-2.mp4"></video>
+          <figcaption><span class="mono"><b>Floral / 02</b></span><span class="mono">Content / Video</span></figcaption>
+        </figure>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 04 / VISUAL ARCHIVE -->
+<section id="archive" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono">04 / Photo · Video</span>
+      <h2 class="sec-title">Visual archive</h2>
+    </div>
+    <div class="g">
+      <figure class="ph c8">
+        <div class="zoom" tabindex="0" data-cap="Editorial · Fashion"><img src="m/arch-moss.jpg" alt="Модель лежит на мху среди веток, fashion-съёмка" loading="lazy"><span class="hov mono">Editorial</span></div>
+        <figcaption><span class="mono"><b>001</b></span><span class="mono">Editorial · Fashion</span></figcaption>
+      </figure>
+      <figure class="v v916 c4">
+        <video controls playsinline preload="none" poster="m/arch-video.jpg" src="m/arch-video.mp4"></video>
+        <figcaption><span class="mono"><b>002</b></span><span class="mono">Editorial · Video</span></figcaption>
+      </figure>
+      <figure class="ph c6 mt">
+        <div class="zoom" tabindex="0" data-cap="Editorial"><img src="m/arch-candle.jpg" alt="Модель в белом атласном платье со свечой на полосатом матрасе" loading="lazy"><span class="hov mono">Editorial</span></div>
+        <figcaption><span class="mono"><b>003</b></span><span class="mono">Editorial</span></figcaption>
+      </figure>
+      <figure class="ph c6 mt offset">
+        <div class="zoom" tabindex="0" data-cap="Commercial · Product"><img src="m/arch-beauty.jpg" alt="Косметика на розовом искусственном снегу, предметная съёмка" loading="lazy"><span class="hov mono">Commercial</span></div>
+        <figcaption><span class="mono"><b>004</b></span><span class="mono">Commercial · Product</span></figcaption>
+      </figure>
+      <figure class="ph c8 mt" style="grid-column:3/span 8">
+        <div class="zoom" tabindex="0" data-cap="Reportage · Show"><img src="m/arch-show.jpg" alt="Фоторепортаж показа Школы дизайна НИУ ВШЭ: монтаж баннеров на площадке" loading="lazy"><span class="hov mono">Reportage</span></div>
+        <figcaption><span class="mono"><b>005</b></span><span class="mono">Reportage · Show</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 07 / ABOUT -->
+<section id="about" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono">05 / About</span>
+      <h2 class="sec-title">About</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <h3>Anastasia Shmygol</h3>
+        <p class="mono" style="margin-top:14px">SMM / Content creator / Photographer</p>
+      </div>
+      <div>
+        <!-- ABOUT TEXT: draft, edit freely -->
+        <p>Создаю визуальный контент для брендов и экспертов — от идеи и сценария до съёмки, монтажа и публикации. Работала на коммерческих площадках со светом и пространством кадра, снимала для каталога ЦУМ, вела соцсети брендов. Мне важно, чтобы визуал работал на коммуникацию, а не просто был красивым.</p>
+        <div class="tags">
+          <span>SMM</span><span>Photography</span><span>Video</span><span>Editing</span><span>Content Production</span><span>Visual Communication</span><span>Adobe Photoshop</span><span>Adobe Illustrator</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 / EQUIPMENT -->
+<section id="equipment" style="padding-top:0">
+  <div class="wrap">
+    <div class="label-row"><span class="mono"><b>Equipment / 01</b></span><span class="mono">06 / Kit</span></div>
+    <div class="equip" id="equip"></div>
+  </div>
+</section>
+
+<!-- 09 / CONTACT -->
+<section id="contact" class="contact" style="padding-top:0">
+  <div class="wrap">
+    <div class="label-row"><span class="mono">07 / Contact</span><span class="mono"><b>Available for relocation</b></span></div>
+    <h2 class="big">Let’s work <em>together</em></h2>
+    <div class="contacts" id="contacts"></div>
+    <div class="foot"><span class="mono">Anastasia Shmygol · Portfolio / 2026</span><span class="mono">Moscow / Available for relocation</span><a class="mono" href="#top" style="text-decoration:none">Back to top ↑</a></div>
+  </div>
+</section>
+</main>
+
+<div class="cur" id="cur">OPEN</div>
+
+<script>
+/* ===== EDIT HERE: contacts & equipment ===== */
+const CONTACTS = [
+  { label: "Telegram", value: "@panikarnaval", href: "https://t.me/panikarnaval" }
+];
+const EQUIPMENT = [
+  { label: "Camera", model: "FUJIFILM X-T30 & iPhone 16 Pro / 17" }
+];
+/* =========================================== */
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.getElementById('contacts').innerHTML = CONTACTS.map(c => c.value
+  ? `<a href="${esc(c.href)}" ${c.href.startsWith('http')?'target="_blank" rel="noopener"':''}><span class="mono">${esc(c.label)} ↗</span><strong>${esc(c.value)}</strong></a>`
+  : `<div><span class="mono">${esc(c.label)}</span><strong style="color:var(--muted)">— добавить</strong></div>`).join('');
+document.getElementById('equip').innerHTML = EQUIPMENT.map(e =>
+  `<div><span class="mono">${esc(e.label)}</span><strong${e.model?'':' style="color:var(--muted)"'}>${esc(e.model || '[model]')}</strong></div>`).join('');
+
+/* one video at a time */
+document.addEventListener('play', e => {
+  document.querySelectorAll('video').forEach(v => { if (v !== e.target) v.pause(); });
+}, true);
+
+/* lightbox */
+function openLB(img, cap){
+  const lb = document.createElement('div');
+  lb.className = 'lb'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-label', cap || 'Photo');
+  lb.innerHTML = `<img src="${img.currentSrc || img.src}" alt="${esc(img.alt)}"><span class="mono">${esc(cap||'')} · Close ✕</span>`;
+  const close = () => { lb.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = e => { if (e.key === 'Escape') close(); };
+  lb.addEventListener('click', close); document.addEventListener('keydown', onKey);
+  document.body.appendChild(lb);
+}
+document.querySelectorAll('.zoom').forEach(z => {
+  const img = z.querySelector('img');
+  z.addEventListener('click', () => openLB(img, z.dataset.cap));
+  z.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLB(img, z.dataset.cap); } });
+});
+
+/* cursor label over photos */
+const cur = document.getElementById('cur');
+if (matchMedia('(hover:hover)').matches) {
+  document.addEventListener('mousemove', e => { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px'; });
+  document.querySelectorAll('.zoom').forEach(z => {
+    z.addEventListener('mouseenter', () => cur.classList.add('on'));
+    z.addEventListener('mouseleave', () => cur.classList.remove('on'));
+  });
+}
+</script>
+
+</body></html>
